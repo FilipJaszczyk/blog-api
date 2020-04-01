@@ -29,6 +29,7 @@ class PostListPostDetailTest(APITestCase):
         '''
         List of posts GET method test for unauthenticated user
         '''
+
         response = self.client.get(reverse('posts'))
         posts = Post.objects.all()
         serializer = PostSerializer(posts, many=True)
@@ -40,6 +41,7 @@ class PostListPostDetailTest(APITestCase):
         '''
         Post detial GET method for unauthenticated user
         '''
+
         response = self.client.get(reverse('post_detail', kwargs={'pk': self.test_user_1_post.pk}))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -47,6 +49,7 @@ class PostListPostDetailTest(APITestCase):
         '''
         PUT method on another user object
         '''
+
         self.client.force_authenticate(user=self.test_user_0)
         response = self.client.put(
             reverse('post_detail', kwargs={'pk': self.test_user_1_post.pk}),
@@ -55,8 +58,16 @@ class PostListPostDetailTest(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         
-    
+    def test_object_positive_permission(self):
+        '''
+        DELETE method on user post 
+        '''
 
+        self.client.force_authenticate(user=self.test_user_0)
+        response = self.client.delete(reverse('post_detail', kwargs={'pk': self.test_user_0_post.pk}))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    
 
 # ========= OLD TEST FOR NO AUTHENTICATION ==================
 # class PostTestCreateMethod(APITestCase):

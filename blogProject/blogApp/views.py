@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework import mixins, generics, permissions
-# from .permissions import IsAuthorOrReadOnly
+from rest_framework import generics, permissions
+from rest_framework import filters
 from .models import Post, User
 from .serializers import PostSerializer, UserSerializer, UserPostSerializer
 from .permissions import IsAuthorOrReadOnly
@@ -14,7 +14,9 @@ class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['author__username', 'title']    
+    
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
@@ -32,21 +34,13 @@ class UserRegistration(generics.CreateAPIView):
     '''
     serializer_class = UserSerializer
 
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class SearchList(generics.ListAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['author__username', 'title']    
+    
 
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-# class UserList(generics.ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserPostSerializer
-
-# class UserDetail():
-#     queryset = User.objects.all()
 
 '''
 Function based views
