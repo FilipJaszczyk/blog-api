@@ -1,6 +1,5 @@
-*Pipfile
-*Pipfile.lock
 *db.sqlite3
-*settings.py
-*migrations
 *.vscode
+*pyc
+__pycache__
+.env
