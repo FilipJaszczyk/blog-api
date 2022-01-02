@@ -61,7 +61,10 @@ paths:
       - {}
       responses:
         '201':
-          description: No response body
+          content:
+            application/json:
+              schema: null
+          description: ''
   /blog/create:
     post:
       operationId: blog_create_create
@@ -87,8 +90,7 @@ paths:
         '201':
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/BlogCreate'
+              schema: null
           description: ''
   /blog/list:
     get:
