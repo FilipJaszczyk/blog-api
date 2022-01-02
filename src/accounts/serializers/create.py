@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from typing import Any
-from src.accounts.models import Account
+from accounts.models import Account
 
 
 class AccountCreateSerializer(serializers.Serializer):

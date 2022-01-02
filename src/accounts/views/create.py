@@ -1,13 +1,18 @@
-from rest_framework.decorators import api_view
+from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.request import HttpRequest
-from src.accounts.serializers import AccountCreateSerializer
-from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
+from accounts.serializers import AccountCreateSerializer
+from rest_framework.generics import CreateAPIView
+from drf_spectacular.utils import OpenApiResponse, extend_schema
 
-@api_view(http_method_names=["POST"])
-def create_user_account(request: HttpRequest) -> Response:
-    serializer = AccountCreateSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=HTTP_201_CREATED)
-    return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+@extend_schema(responses={
+    201: OpenApiResponse(response=""),
+})
+class CreateAccount(CreateAPIView):
+    serializer_class = AccountCreateSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(None, status=status.HTTP_201_CREATED, headers=headers)

@@ -1,4 +1,4 @@
-from src.accounts.models import Account
+from accounts.models import Account
 from rest_framework import serializers
 
 
