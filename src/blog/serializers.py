@@ -2,7 +2,7 @@ from rest_framework import serializers
 from utils.serializers import ReadOnlyModelSerializer
 from blog.models import BlogEntry
 
-class BlogListSerializer(serializers.ModelSerializer):
+class BlogListSerializer(ReadOnlyModelSerializer):
     class Meta:
         model = BlogEntry
         fields = [
