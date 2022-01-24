@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import Account
 
+
 class BlogEntry(models.Model):
     title = models.CharField(max_length=512, blank=False)
     content = models.TextField(blank=False)

@@ -2,14 +2,12 @@ from rest_framework import serializers
 from utils.serializers import ReadOnlyModelSerializer
 from blog.models import BlogEntry
 
+
 class BlogListSerializer(ReadOnlyModelSerializer):
     class Meta:
         model = BlogEntry
-        fields = [
-            "id",
-            "title",
-            "updated_at"
-        ]
+        fields = ["id", "title", "updated_at"]
+
 
 class BlogCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,13 +19,10 @@ class BlogCreateSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        return BlogEntry.objects.create(**validated_data) 
+        return BlogEntry.objects.create(**validated_data)
+
 
 class BlogDetailSerializer(ReadOnlyModelSerializer):
     class Meta:
         model = BlogEntry
-        fields = [
-            "title",
-            "content",
-            "created_at"
-        ]
+        fields = ["title", "content", "created_at"]

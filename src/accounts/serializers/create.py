@@ -19,4 +19,9 @@ class AccountCreateSerializer(serializers.Serializer):
         return super().validate(attrs)
 
     def create(self, validated_data: dict) -> Account:
-        return Account.objects.create(**validated_data)
+        return Account.objects.create(
+            email=validated_data["email"],
+            given_name=validated_data["given_name"],
+            family_name=validated_data["family_name"],
+            password=validated_data["password"],
+        )
