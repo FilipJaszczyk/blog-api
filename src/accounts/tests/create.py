@@ -7,6 +7,7 @@ from django.test import tag
 
 ENDPOINT = "account-create"
 
+
 @tag(ENDPOINT)
 class CreateAccountSuite(APITestCase):
     def setUp(self) -> None:
