@@ -9,6 +9,7 @@ djangorestframework = "==3.13.*"
 drf-spectacular = "*"
 gunicorn = "*"
 djangorestframework-simplejwt = "*"
+django-fsm = "*"
 
 [dev-packages]
 black = "==21.12b0"
