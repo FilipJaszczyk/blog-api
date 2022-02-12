@@ -26,6 +26,6 @@ urlpatterns = [
     path("blog/", include("blog.urls")),
     path("accounts/", include("accounts.urls")),
     # Authentication
-    path("auth/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("auth/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("auth/token/", TokenObtainPairView.as_view(), name="token-obtain-pair"),
+    path("auth/token/refresh/", TokenRefreshView.as_view(), name="token-refresh"),
 ]

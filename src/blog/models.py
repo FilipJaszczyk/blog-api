@@ -11,7 +11,6 @@ class BlogEntryStates(Enum):
     DRAFT = 0
     PUBLISHED = 1
     ARCHIVED = 2
-    
 
 
 class BlogEntry(models.Model):
@@ -24,13 +23,19 @@ class BlogEntry(models.Model):
     published_at = models.DateTimeField(null=True)
     archived_at = models.DateTimeField(null=True)
 
-    @transition(field=state, 
-    source=BlogEntryStates.DRAFT.value, target=BlogEntryStates.PUBLISHED.value)
+    @transition(
+        field=state,
+        source=BlogEntryStates.DRAFT.value,
+        target=BlogEntryStates.PUBLISHED.value,
+    )
     def publish(self):
         self.published_at = datetime.now()
 
-    @transition(field=state, 
-    source=BlogEntryStates.DRAFT.value, target=BlogEntryStates.PUBLISHED.value)
+    @transition(
+        field=state,
+        source=[BlogEntryStates.DRAFT.value, BlogEntryStates.PUBLISHED.value],
+        target=BlogEntryStates.ARCHIVED.value,
+    )
     def archive(self):
         self.archived_at = datetime.now()
 

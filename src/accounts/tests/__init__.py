@@ -1,2 +1,2 @@
 from .create import CreateAccountSuite
-from .retrieve_current import RetrieveCurrentAccount
+from .retrieve_current import RetrieveCurrentAccountSuite

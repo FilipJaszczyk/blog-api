@@ -10,16 +10,20 @@ class BlogListSerializer(ReadOnlyModelSerializer):
 
 
 class BlogCreateSerializer(serializers.ModelSerializer):
+    """
+    Functionality relies on IsAuthenticated permission as it is
+    extracting informations related to Account from `context["request"]`
+    """
     class Meta:
         model = BlogEntry
         fields = [
             "title",
             "content",
-            "created_by",
         ]
 
     def create(self, validated_data):
-        return BlogEntry.objects.create(**validated_data)
+        return BlogEntry.objects.create(**validated_data, 
+        created_by=self.context["request"].user)
 
 
 class BlogDetailSerializer(ReadOnlyModelSerializer):

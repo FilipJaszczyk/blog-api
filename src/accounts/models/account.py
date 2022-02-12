@@ -29,11 +29,12 @@ class AccountManager(BaseUserManager):
 
 class Account(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    email = models.EmailField("email address", unique=True)
+    email = models.EmailField(unique=True)
     given_name = models.CharField(max_length=256, null=True)
     family_name = models.CharField(max_length=256, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    username = None
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -41,8 +42,3 @@ class Account(AbstractUser):
 
     def __str__(self):
         return self.email
-
-    class Meta:
-        indexes = [
-            models.Index(fields=["email"], name="email_idx"),
-        ]

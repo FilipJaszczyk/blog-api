@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     "utils",
     "rest_framework_simplejwt",
     "drf_spectacular",
+    "django_fsm",
 ]
 
 REST_FRAMEWORK = {
@@ -35,9 +36,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -69,12 +68,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
-
 USE_I18N = True
 
 USE_L10N = True
-
-USE_TZ = True
 
 AUTH_USER_MODEL = "accounts.Account"

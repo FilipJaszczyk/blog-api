@@ -10,7 +10,7 @@ ENDPOINT = "current-account-details"
 
 
 @tag(ENDPOINT)
-class RetrieveCurrentAccount(APITestCase):
+class RetrieveCurrentAccountSuite(APITestCase):
     def test_unauthenticated(self):
         res = self.client.get(reverse(ENDPOINT))
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
