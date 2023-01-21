@@ -9,6 +9,7 @@ from faker import Faker
 ENDPOINT = "current-account-details"
 
 
+
 @tag(ENDPOINT)
 class RetrieveCurrentAccountSuite(APITestCase):
     def test_unauthenticated(self):
